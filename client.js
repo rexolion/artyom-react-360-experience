@@ -1,7 +1,7 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
 
-import {ReactInstance} from 'react-360-web';
+import {ReactInstance, Enviroment, VideoModule, staticResourceURL } from 'react-360-web';
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
@@ -16,8 +16,8 @@ function init(bundle, parent, options = {}) {
     r360.getDefaultSurface()
   );
 
-  // Load the initial environment
-  r360.compositor.setBackground(r360.getAssetURL('360-redull-storytelling-vr.png'));
+   
+
 }
 
 window.React360 = {init};

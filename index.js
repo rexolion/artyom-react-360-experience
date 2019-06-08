@@ -4,15 +4,50 @@ import {
   StyleSheet,
   Text,
   View,
+  VrButton,
+  Environment,
+  NativeModules,
+  staticAssetURL
 } from 'react-360';
+const {VideoModule} = NativeModules;
 
 export default class react_360 extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: 0
+    }
+  }
+
+  getDate = () => {
+    const d = new Date();
+    const time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    this.setState({date: time});
+  }
+
+  componentDidMount() {
+    setInterval(this.getDate, 1000);
+
+    VideoModule.createPlayer('myplayer');
+
+    VideoModule.play('myplayer', {
+      source: {url: '/static_assets/Best VR 360 Video.webm'}
+
+    })
+
+    Environment.setBackgroundVideo('myplayer');
+
+  }
+  
+
   render() {
     return (
       <View style={styles.panel}>
         <View style={styles.greetingBox}>
+          <VrButton
+            /> 
           <Text style={styles.greeting}>
-            Welcome to React 360
+            {`${this.state.date}`}
           </Text>
         </View>
       </View>
